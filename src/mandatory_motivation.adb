@@ -1,3 +1,4 @@
+with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Strings.Unbounded;
 with GNAT.Decode_UTF8_String;
 with Interfaces.C;
@@ -8,6 +9,7 @@ procedure Mandatory_Motivation is
    use Ada.Strings.Unbounded;
    use Interfaces.C;
 
+   Manager     : Motivational_Messages.Motivation_Manager;
    H_Wnd       : constant int := 0;
    Caption     : constant char16_array := To_C ("Mandatory Motivation");
    Caption_Ali : aliased char16_array := Caption;
@@ -20,8 +22,12 @@ procedure Mandatory_Motivation is
    Next_Time : Duration;
 
 begin
+   if Manager.Initialize_JSON_Read = 1 then
+      Put_Line ("[ERROR] Failed to initialize messages.");
+   end if;
+
    loop
-      Get_Message := Motivational_Messages.Get_Random_Message;
+      Get_Message := Manager.Get_Random_Message;
       declare
          -- UTF16にする必要のため、Get_Messageを変換する
          use GNAT.Decode_UTF8_String;
