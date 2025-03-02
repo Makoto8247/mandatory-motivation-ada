@@ -24,6 +24,7 @@ package body Motivational_Messages is
    exception
       when NOT_GET_FILE =>
          Put_Line ("Failed to get JSON file");
+         Put_Line ("The JSON file will be stored in . /json/motivational_messages.json.");
          return 1;
       when others =>
          Put_Line ("Failed to get JSON Values");
