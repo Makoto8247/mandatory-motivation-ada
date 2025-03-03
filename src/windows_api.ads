@@ -11,7 +11,6 @@ package Windows_API is
    SWP_NOZORDER     : constant unsigned := 4;
    SWP_NOACTIVATE   : constant unsigned := 16;
    
-   -- MessageBox
    function MessageBox (
       hWnd : int;
       Text : access constant char16_array;
@@ -19,7 +18,6 @@ package Windows_API is
       uType : unsigned) return int
    with Import, Convention => Stdcall, Link_Name => "MessageBoxW";
 
-   -- SetWindowPos
    function SetWindowPos (
       hWnd : int;
       hWindInsertAfter : HWND_Type;
@@ -34,4 +32,7 @@ package Windows_API is
       lpClassName : access constant char16_array;
       lpWindowName : access constant char16_array) return int
    with Import, Convention => Stdcall, Link_Name => "FindWindowW"; 
+
+   function SetForegroundWindow ( hWnd : int ) return Boolean
+   with Import, Convention => Stdcall, Link_Name => "SetForegroundWindow";
 end Windows_API;
