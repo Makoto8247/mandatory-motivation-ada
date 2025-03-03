@@ -42,10 +42,8 @@ package body Motivational_Messages is
          raise NOT_INITIALIZED;
       end if;
 
-      -- ランダム生成器の初期化
       Random_Natural.Reset (Gen);
       
-      -- ランダムに1つ選択
       Rnd_Num := Random_Natural.Random (Gen, 1, Self.Messages_Length);
 
       -- JSON配列から文字列を取得
@@ -68,7 +66,6 @@ package body Motivational_Messages is
       Result : Duration;
       Rnd_Num : Natural;
    begin
-      -- ランダム生成器の初期化
       Random_Time.Reset (Gen);
 
       Rnd_Num := Random_Time.Random (Gen, 1, Max_Minutes);
