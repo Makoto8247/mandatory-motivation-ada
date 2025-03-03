@@ -6,10 +6,11 @@ package Windows_API is
    HWND_NOTOPMOST : constant HWND_Type := -2;
    HWND_DESKTOP : constant HWND_Type := 0;
 
-   SWP_NOSIZE       : constant unsigned := 1;
-   SWP_NOMOVE       : constant unsigned := 2;
-   SWP_NOZORDER     : constant unsigned := 4;
-   SWP_NOACTIVATE   : constant unsigned := 16;
+   SWP_NOSIZE       : constant unsigned := 16#0001#;
+   SWP_NOMOVE       : constant unsigned := 16#0002#;
+   SWP_NOZORDER     : constant unsigned := 16#0004#;
+   SWP_NOACTIVATE   : constant unsigned := 16#0010#;
+   SWP_SHOWWINDOW   : constant unsigned := 16#0040#;
    
    function MessageBox (
       hWnd : int;
@@ -33,6 +34,9 @@ package Windows_API is
       lpWindowName : access constant char16_array) return int
    with Import, Convention => Stdcall, Link_Name => "FindWindowW"; 
 
-   function SetForegroundWindow ( hWnd : int ) return Boolean
+   function SetForegroundWindow (hWnd : int) return Boolean
    with Import, Convention => Stdcall, Link_Name => "SetForegroundWindow";
+
+   function IsWindow (hWnd : int) return Boolean
+   with Import, Convention => Stdcall, Link_Name => "IsWindow";
 end Windows_API;
